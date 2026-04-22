@@ -1,0 +1,26 @@
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>InterviewSys</h2>
+
+    <a routerLink="/admin">Dashboard</a>
+    <a routerLink="/admin/schedule">Schedule Interview</a>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <h3>Admin Panel 👑</h3>
+      <button (click)="logout()">Logout</button>
+    </header>
+
+    <!-- Dynamic Content -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>

@@ -1,131 +1,87 @@
-<div class="container">
-  <h2>INTERVIEW SCHEDULER</h2>
-  <form (ngSubmit)="scheduleInterview(interviewForm)" #interviewForm="ngForm">
-    <div class="form-group-row">
-      <!-- Stage of Interview Section -->
-      <div class="form-group">
-        <label for="stageOfInterview">Stage of Interview:</label>
-        <select id="stageOfInterview" [(ngModel)]="interview.stageOfInterview" name="stageOfInterview" class="form-control" required>
-          <option value="" disabled selected>-- Select --</option>
-          <option value="First Round">First Round</option>
-          <option value="Second Round">Second Round</option>
-          <option value="Final Round">Final Round</option>
-        </select>
-        <div *ngIf="interviewForm.controls['stageOfInterview']?.invalid && interviewForm.controls['stageOfInterview']?.touched" class="error">
-          Please select a stage of interview.
+<div class="page">
+  <div class="card">
+
+    <h2>Interview Scheduler</h2>
+
+    <form (ngSubmit)="scheduleInterview(interviewForm)" #interviewForm="ngForm">
+
+      <!-- ================= BASIC INFO ================= -->
+      <div class="form-group-row">
+
+        <div class="form-group">
+          <label>Stage of Interview</label>
+          <select [(ngModel)]="interview.stageOfInterview" name="stageOfInterview" required>
+            <option value="">-- Select --</option>
+            <option>First Round</option>
+            <option>Second Round</option>
+            <option>Final Round</option>
+          </select>
         </div>
+
+        <div class="form-group">
+          <label>Recruiter Email</label>
+          <input type="email" [(ngModel)]="interview.recruiterEmail" name="recruiterEmail" required>
+        </div>
+
+        <div class="form-group">
+          <label>Candidate Email</label>
+          <input type="email" [(ngModel)]="interview.candidateEmail" name="candidateEmail" required>
+        </div>
+
+        <div class="form-group">
+          <label>Recruiter Name</label>
+          <input type="text" [(ngModel)]="interview.recruiterName" name="recruiterName" required>
+        </div>
+
+        <div class="form-group">
+          <label>Candidate Name</label>
+          <input type="text" [(ngModel)]="interview.candidateName" name="candidateName" required>
+        </div>
+
+        <div class="form-group">
+          <label>Interview Date</label>
+          <input type="datetime-local" [(ngModel)]="interview.interviewDate" name="interviewDate" required>
+        </div>
+
       </div>
 
-      <!-- Recruiter Mail id Section -->
-      <div class="form-group">
-        <label for="recruiterMailId">Recruiter Mail id:</label>
-        <input type="email" id="recruiterMailId" [(ngModel)]="interview.recruiterEmail" name="recruiterMailId" class="form-control" required email placeholder="Enter Recruiter Email">
-        <div *ngIf="interviewForm.controls['recruiterMailId']?.invalid && interviewForm.controls['recruiterMailId']?.touched" class="error">
-          Please enter a valid email address.
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group-row">
-      <!-- Candidate Mail id Section -->
-      <div class="form-group">
-        <label for="candidateMailId">Candidate Mail id:</label>
-        <input type="email" id="candidateMailId" [(ngModel)]="interview.candidateEmail" name="candidateMailId" class="form-control" required email placeholder="Enter Candidate Email">
-        <div *ngIf="interviewForm.controls['candidateMailId']?.invalid && interviewForm.controls['candidateMailId']?.touched" class="error">
-          Please enter a valid email address.
-        </div>
-      </div>
-
-      <!-- Recruiter Name Section -->
-      <div class="form-group">
-        <label for="recruiterName">Recruiter Name:</label>
-        <input type="text" id="recruiterName" [(ngModel)]="interview.recruiterName" name="recruiterName" class="form-control" required
-               pattern="^[A-Za-z\s\-']+$" #recruiterName="ngModel" minlength="3" placeholder="Enter the Recruiter Name" />
-        <div *ngIf="recruiterName.invalid && recruiterName.touched" class="text-danger">
-          <small *ngIf="recruiterName.errors?.['required']">Recruiter Name is required.</small>
-          <small *ngIf="recruiterName.errors?.['minlength']">Recruiter Name must be at least 3 characters long.</small>
-          <small *ngIf="recruiterName.errors?.['pattern']">Recruiter Name can only contain alphabets, spaces, hyphens, or apostrophes.</small>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group-row">
-      <!-- Candidate Name Section -->
-      <div class="form-group">
-        <label for="candidateName">Candidate Name:</label>
-        <input type="text" id="candidateName" [(ngModel)]="interview.candidateName" name="candidateName" class="form-control" required
-               pattern="^[A-Za-z\s\-']+$" #candidateName="ngModel" minlength="3" placeholder="Enter the Candidate Name" />
-        <div *ngIf="candidateName.invalid && candidateName.touched" class="text-danger">
-          <small *ngIf="candidateName.errors?.['required']">Candidate Name is required.</small>
-          <small *ngIf="candidateName.errors?.['minlength']">Candidate Name must be at least 3 characters long.</small>
-          <small *ngIf="candidateName.errors?.['pattern']">Candidate Name can only contain alphabets, spaces, hyphens, or apostrophes.</small>
-        </div>
-      </div>
-
-      <!-- Interview Date Section -->
-      <div class="form-group">
-        <label for="interviewDate">Interview Date:</label>
-        <input type="datetime-local" id="interviewDate" [(ngModel)]="interview.interviewDate" name="interviewDate" class="form-control" required placeholder="Select Interview Date">
-        <div *ngIf="interviewForm.controls['interviewDate']?.invalid && interviewForm.controls['interviewDate']?.touched" class="error">
-          Please select an interview date.
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group-row">
-      <!-- Interview Type Section -->
-      <div class="form-group">
-        <label for="interviewType">Interview Type:</label>
-        <select id="interviewType" [(ngModel)]="interview.interviewType" name="interviewType" class="form-control" required (change)="onInterviewTypeChange()">
-          <option value="" disabled selected>-- Select --</option>
+      <!-- ================= INTERVIEW TYPE ================= -->
+      <div class="form-group full-width">
+        <label>Interview Type</label>
+        <select [(ngModel)]="interview.interviewType" name="interviewType" (change)="onInterviewTypeChange()" required>
+          <option value="">-- Select --</option>
           <option value="ONLINE MEET">ONLINE MEET</option>
           <option value="TELEPHONIC">TELEPHONIC</option>
           <option value="IN OFFICE">IN PERSON</option>
         </select>
-        <div *ngIf="interviewForm.controls['interviewType']?.invalid && interviewForm.controls['interviewType']?.touched" class="error">
-          Please select an interview type.
-        </div>
       </div>
 
-      <!-- Google Meet Link Section -->
-      <div class="form-group" *ngIf="interview.interviewType === 'ONLINE MEET'">
-        <label for="googleMeetLink">Google Meet Link:</label>
-        <input type="url" id="googleMeetLink" [(ngModel)]="interview.googleMeetLink" name="googleMeetLink" class="form-control" required pattern="https?://.+" placeholder="Enter Google Meet Link">
-        <div *ngIf="interviewForm.controls['googleMeetLink']?.invalid && interviewForm.controls['googleMeetLink']?.touched" class="error">
-          Please enter a valid Google Meet link.
-        </div>
+      <!-- ================= CONDITIONAL FIELDS ================= -->
+
+      <div *ngIf="interview.interviewType === 'ONLINE MEET'" class="form-group full-width">
+        <input placeholder="Google Meet Link" [(ngModel)]="interview.googleMeetLink" name="googleMeetLink">
       </div>
 
-      <!-- Phone Number Section -->
-      <div class="form-group" *ngIf="interview.interviewType === 'TELEPHONIC'">
-        <label for="phoneNumber">Phone Number:</label>
-        <input type="tel" id="phoneNumber" [(ngModel)]="interview.phoneNumber" name="phoneNumber" class="form-control" required pattern="[0-9]{10}" placeholder="Enter Phone Number">
-        <div *ngIf="interviewForm.controls['phoneNumber']?.invalid && interviewForm.controls['phoneNumber']?.touched" class="error">
-          Please enter a valid phone number.
-        </div>
+      <div *ngIf="interview.interviewType === 'TELEPHONIC'" class="form-group full-width">
+        <input placeholder="Phone Number" [(ngModel)]="interview.phoneNumber" name="phoneNumber">
       </div>
-    </div>
 
-    <!-- In Office Description Section -->
-    <div class="form-group" *ngIf="interview.interviewType === 'IN OFFICE'">
-      <label for="inOfficeDescription">Office Address:</label>
-      <textarea id="inOfficeDescription" [(ngModel)]="interview.inOfficeDescription" name="inOfficeDescription" class="form-control" maxlength="100" required placeholder="Enter office Address "></textarea>
-      <div *ngIf="interviewForm.controls['inOfficeDescription']?.invalid && interviewForm.controls['inOfficeDescription']?.touched" class="error">
-        <small *ngIf="interviewForm.controls['inOfficeDescription']?.errors?.['required']">In Office Description is required.</small>
-        <small *ngIf="interviewForm.controls['inOfficeDescription']?.value?.length > 100">Description must not exceed 100 characters.</small>
+      <div *ngIf="interview.interviewType === 'IN OFFICE'" class="form-group full-width">
+        <textarea placeholder="Office Address" [(ngModel)]="interview.inOfficeDescription" name="inOfficeDescription"></textarea>
       </div>
-    </div>
 
-    <!-- Common Description Section -->
-    <div class="form-group">
-      <label for="description">Description:</label>
-      <textarea id="description" [(ngModel)]="interview.description" name="description" class="form-control" maxlength="50" placeholder="Enter description"></textarea>
-      <div *ngIf="interviewForm.controls['description']?.touched && interviewForm.controls['description']?.value?.length > 50" class="error">
-        Description must not exceed 50 characters.
+      <!-- ================= DESCRIPTION ================= -->
+      <div class="form-group full-width">
+        <label>Description</label>
+        <textarea [(ngModel)]="interview.description" name="description"></textarea>
       </div>
-    </div>
 
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary" [disabled]="interviewForm.invalid">Submit</button>
-  </form>
+      <!-- ================= SUBMIT ================= -->
+      <button type="submit" [disabled]="interviewForm.invalid">
+        Schedule Interview
+      </button>
+
+    </form>
+
+  </div>
 </div>

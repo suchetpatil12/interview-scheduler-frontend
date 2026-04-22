@@ -1,0 +1,46 @@
+<div class="bg-red-500 text-white p-5">
+  Tailwind Test
+</div>
+<div class="h-screen flex items-center justify-center bg-gray-200">
+
+  <div class="w-[800px] h-[450px] bg-white rounded-xl shadow-lg flex overflow-hidden">
+
+    <!-- LEFT SIDE -->
+    <div class="w-1/2 flex flex-col justify-center items-center p-10">
+
+      <h2 class="text-3xl font-bold mb-6">Sign in</h2>
+
+      <input [(ngModel)]="username"
+        class="w-full mb-4 p-2 border rounded bg-gray-100"
+        placeholder="Username" />
+
+      <input [(ngModel)]="password"
+        type="password"
+        class="w-full mb-4 p-2 border rounded bg-gray-100"
+        placeholder="Password" />
+
+      <button (click)="login()"
+        class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600">
+        SIGN IN
+      </button>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="w-1/2 bg-red-500 text-white flex flex-col justify-center items-center p-10">
+
+      <h2 class="text-3xl font-bold mb-4">Hello, Friend!</h2>
+
+      <p class="text-center mb-6">
+        Enter your details and start your journey with us
+      </p>
+
+      <button class="border border-white px-6 py-2 rounded-full hover:bg-white hover:text-red-500">
+        SIGN UP
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
